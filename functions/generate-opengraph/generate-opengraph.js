@@ -38,7 +38,7 @@ exports.handler = async function (event, ctx) {
     content: `
       window.title = "${title || "No Title"}";
       window.tags = ${JSON.stringify(tags)};
-      window.author = "${author || ""}";
+      window.author = "${decodeURIComponent(author) || ""}";
     `,
   });
   await page.addScriptTag({ content: script });

@@ -1,0 +1,13 @@
+{
+  "name": "dynamic-opengraph-images",
+  "version": "0.0.1",
+  "description": "Dynamic generated opengraph images with Netlify, TailwindCSS and Cloudinary",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:danestves/dynamic-opengraph-images.git"
+  },
+  "author": "Daniel <estevesd8@gmail.com>",
+  "license": "MIT",
+  "private": false
+}

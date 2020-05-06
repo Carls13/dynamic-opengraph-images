@@ -2,27 +2,34 @@ const playwright = require("playwright-aws-lambda");
 
 exports.handler = async function (event, ctx) {
   const browser = await playwright.launchChromium();
-  const context = await browser._defaultContext;
-  const page = await context.newPage();
-  await page.setContent(`<!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset="utf-8" />
-    </head>
-  
-    <body>
-      <div id="corgi"><div>CORGIIIS</div></div>
-    </body>
-  </html>
+  const page = await browser.newPage();
+
+  await page.setContent(`
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+      <body>
+        <div id="app">
+          <div>Holaaaaa</div>
+        </div>
+      </body>
+    </html>
   `);
-  const boundingRect = await page.evaluate(() => {
-    const corgi = document.getElementById("corgi");
-    const { x, y, width, height } = corgi.children[0].getBoundingClientRect();
+
+  const boundingReact = await page.evaluate(() => {
+    const app = document.getElementById("app");
+    const { x, y, width, height } = app.children[0].getBoundingClientRect();
+
     return { x, y, width, height };
   });
 
-  const screenshotBuffer = await page.screenshot({ clip: boundingRect });
+  const screenshotBuffer = await page.screenshot({ clip: boundingReact });
+
   await browser.close();
+
   return {
     isBase64Encoded: true,
     statusCode: 200,

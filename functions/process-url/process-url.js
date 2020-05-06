@@ -9,7 +9,6 @@ cloudinary.config({
 
 exports.handler = async function (event, ctx) {
   const { queryStringParameters } = event;
-  console.log(queryStringParameters);
 
   try {
     const imageUrl = cloudinary.url(
@@ -27,11 +26,7 @@ exports.handler = async function (event, ctx) {
       }
     );
 
-    console.log(
-      `https://stoic-keller-2f5036.netlify.app/.netlify/functions/generate-opengraph?${qs.stringify(
-        queryStringParameters
-      )}`
-    );
+    console.log(imageUrl);
 
     return {
       statusCode: 302,

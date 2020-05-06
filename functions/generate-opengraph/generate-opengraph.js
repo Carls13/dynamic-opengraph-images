@@ -2,7 +2,7 @@ const playwright = require("playwright-aws-lambda");
 
 exports.handler = async function (event, ctx) {
   const browser = await playwright.launchChromium();
-  const context = await browser._defaultContext;
+  const context = await browser.defaultContext();
   const page = await context.newPage();
 
   await page.setContent(`

@@ -2,5 +2,9 @@
   "name": "generate-opengraph",
   "version": "0.0.1",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "playwright-aws-lambda": "^0.4.0",
+    "playwright-core": "^1.0.0"
+  }
 }

@@ -1,2 +1,2 @@
 install:
-	echo "installed"
+	cd functions/generate-opengraph && npm i

@@ -31,7 +31,7 @@ exports.handler = async function (event, ctx) {
   `);
 
   const {
-    queryStringParameters: { tagsParam, title, author },
+    queryStringParameters: { tags: tagsParam, title, author },
   } = event;
   const tags = tagsParam ? decodeURIComponent(tagsParam).split(",") : [];
   await page.addScriptTag({

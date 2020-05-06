@@ -1,8 +1,9 @@
 /** @jsx jsx */
 import { jsx, Global } from "@emotion/core";
 import Textfit from "react-textfit";
+import { render } from "react-dom";
 
-export default function App() {
+function App() {
   return (
     <div
       css={{
@@ -24,7 +25,6 @@ export default function App() {
           },
         }}
       />
-
       <div
         css={{
           background: "#041016",
@@ -33,7 +33,7 @@ export default function App() {
           flex: 1,
           flexDirection: "column",
           justifyContent: "space-between",
-          borderRadius: 16,
+          borderRadius: 15,
           padding: "8rem",
           boxShadow: `
             0 2.8px 2.2px rgba(0, 0, 0, 0.02),
@@ -90,9 +90,11 @@ export default function App() {
               <li key={tag}>{tag}</li>
             ))}
           </ul>
-          <span>@{window.author}</span>
+          <span>{window.author}</span>
         </div>
       </div>
     </div>
   );
 }
+
+render(<App />, document.getElementById("app"));

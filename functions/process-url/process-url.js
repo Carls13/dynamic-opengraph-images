@@ -19,7 +19,7 @@ exports.handler = async function (event, ctx) {
         // secure: true,
         custom_pre_function: {
           function_type: "remote",
-          source: `https://stoic-keller-2f5036.netlify.app/.netlify/functions/generate-opengraph?${qs.stringify(
+          source: `https://opengraph.netlify.app/.netlify/functions/generate-opengraph?${qs.stringify(
             queryStringParameters
           )}`,
         },

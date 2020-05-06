@@ -1,9 +1,19 @@
+// Dependencies
 const playwright = require("playwright-aws-lambda");
+const fs = require("fs");
+
+// Script
+const script = fs.readFileSync("./image.js", "utf-8");
 
 exports.handler = async function (event, ctx) {
   const browser = await playwright.launchChromium();
   const context = await browser._defaultContext;
   const page = await context.newPage();
+
+  page.setViewportSize({
+    width: 1200,
+    height: 630,
+  });
 
   await page.setContent(`
     <!DOCTYPE html>
@@ -19,6 +29,19 @@ exports.handler = async function (event, ctx) {
       </body>
     </html>
   `);
+
+  const {
+    queryStringParameters: { tagsParam, title, author },
+  } = event;
+  const tags = tagsParam ? decodeURIComponent(tagsParam).split(",") : [];
+  await page.addScriptTag({
+    content: `
+      window.title = "${title || "No Title"}";
+      window.tags = ${JSON.stringify(tags)};
+      window.author = "${author || ""}";
+    `,
+  });
+  await page.addScriptTag({ content: script });
 
   const boundingReact = await page.evaluate(() => {
     const app = document.getElementById("app");
